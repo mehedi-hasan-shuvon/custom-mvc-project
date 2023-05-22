@@ -2,7 +2,54 @@
 
 class User{
 
-    public $name;
+    private $db;
+
+    private $join;
+
+    private $colName;
+
+    public function __construct(){
+        $this->db = new Database;
+        $this->join= "citytb ON students.city=citytb.cid";
+        $this->colName='students.id,students.student_name,students.age,citytb.cname';
+    }
+
+    public function getUsers(){
+        $this->db->select('students','*',$this->join,null,'id',null);
+        $result=$this->db->getResult();
+        $result=json_encode($result);
+        // echo $result;
+        return $result;
+    }
+
+    public function getCities(){
+        $this->db->select('citytb','*');
+        $result=$this->db->getResult();
+        $result=json_encode($result);
+        // echo $result;
+        return $result;
+    }
+
+    //create user
+    public function createUser($data=[]){
+
+       print_r($data);
+        $this->db->insert('students',$data);
+        $result=$this->db->getResult();
+        return $result;
+    }
+
+    //delete user
+    public function deleteUser($userId){
+       
+        $where="id=".$userId;
+        $this->db->delete('students',$where);
+        $result=$this->db->getResult();
+        return $result;
+    }
+
+
+
 
 }
 

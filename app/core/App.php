@@ -12,6 +12,11 @@ Class App {
        
         $url = $this->parseURL();
 
+     
+
+
+
+
         if(file_exists('../app/controllers/' . $url[0] . '.php')) {
             $this->controller = $url[0];
             unset($url[0]); // unset() is used to remove the first element of the array
@@ -31,6 +36,7 @@ Class App {
 
         $this->params = $url ? array_values($url) : []; // this will set the params to the remaining elements of the array if there are any, otherwise it will set it to an empty array
 
+        
         call_user_func_array([$this->controller, $this->method], $this->params); // this will call the method of the controller class and pass the params to it
     }
 
