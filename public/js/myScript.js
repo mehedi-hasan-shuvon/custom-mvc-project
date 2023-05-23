@@ -60,19 +60,13 @@ app.controller("myCtrl", ($scope, $http) => {
         city: $scope.selectedCity,
       };
 
-      //   merge  data object with the url  with /
-      url =
-        url +
-        "/" +
-        $scope.studentName +
-        "/" +
-        $scope.age +
-        "/" +
-        $scope.selectedCity;
-
-      $http.post(url).then(
+      $http.post(url, data).then(
         (response) => {
-          console.log("added");
+          console.log(response);
+          // $scope.studentName = "";
+          // $scope.age = "";
+          // $scope.selectedCity = "";
+          // alert("Student added successfully");
         },
         (error) => {
           console.log(error);

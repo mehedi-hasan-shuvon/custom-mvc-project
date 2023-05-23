@@ -12,8 +12,6 @@ Class App {
        
         $url = $this->parseURL();
 
-     
-
 
 
 
@@ -34,13 +32,34 @@ Class App {
             }
         }
 
+        
+
         $this->params = $url ? array_values($url) : []; // this will set the params to the remaining elements of the array if there are any, otherwise it will set it to an empty array
 
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $requestData = json_decode(file_get_contents('php://input'), true);
         
+      
+        //    loop through the request data and add it to the params array
+            foreach($requestData as $key => $value){
+                $this->params[$key] = $value;
+            }
+            
+            
+            // print_r($this->method);
+
+        }
+
+        print_r($this->params);
+
+        
+       
         call_user_func_array([$this->controller, $this->method], $this->params); // this will call the method of the controller class and pass the params to it
     }
 
     public function parseURL() {
+      
+
         if(isset($_GET['url'])) {
            return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)); // filter_var() is used to filter the url from any unwanted characters and explode() is used to convert the url into an array
         }

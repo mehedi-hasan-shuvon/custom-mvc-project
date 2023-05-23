@@ -27,10 +27,11 @@ Class Home extends Controller {
     public function deleteUser($id){
      
         $this->userModel->deleteUser($id);
-        header('location: ' . URLROOT . '/home/index');
+        // header('location: ' . URLROOT . '/home/index');
     }
 
     public function addUser($data=[]){
+        print_r($data);
         $this->userModel->createUser($data);
         header('location: ' . URLROOT . '/home/index');
     }

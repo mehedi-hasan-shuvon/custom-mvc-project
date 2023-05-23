@@ -33,7 +33,6 @@ class User{
     //create user
     public function createUser($data=[]){
 
-       print_r($data);
         $this->db->insert('students',$data);
         $result=$this->db->getResult();
         return $result;

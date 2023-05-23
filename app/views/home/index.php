@@ -8,7 +8,7 @@
     //make userlist compatible with angular
     $userList = str_replace('"', "'", $userList);
     $cityList = str_replace('"', "'", $cityList);
-    echo $cityList;
+   
     
 ?>
 
